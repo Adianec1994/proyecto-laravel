@@ -9,7 +9,7 @@ class Empresa extends Model
     protected $table = 'empresas';
 
     protected $fillable = [
-        'nombre','cantidad_provincias'
+        'nombre','activo'
     ];
 
     protected $primaryKey = 'idEmpresas';

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'cargo', 'username', 'email', 'password','activo','rol_id'
     ];
 
     /**
@@ -28,38 +28,19 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles(){
-        return $this->belongsToMany('App\Role')->withTimestamps();
+    public function rol(){
+        return $this->belongsTo('App\Role','rol_id');
     }
 
-    public function authorizeRoles($roles){
-        if($this->hasAnyRole($roles)){
-            return true;
-        }
-        return false;
-        //abort(401,'Esta accion no esta permitidasssssss');
+    public function trazas()
+    {
+        return $this->belongsTo('App\Traza', 'id');
     }
 
-    public function hasAnyRole($roles){
-        if(is_array($roles)){
-            foreach ($roles as $role){
-                if($this->hasRole($role)){
-                    return true;
-                }
-            }
+    public function setPasswordAttribute($valor){
+        if (!empty($valor)){
+            $this->attributes['password']=\Hash::make($valor);
         }
-        else{
-            if($this->hasRole($roles)){
-                return true;
-            }
-        }
-        return false;
-    }
 
-    public function hasRole($role){
-        if($this->roles()->where('name',$role)->first()){
-            return true;
-        }
-        return false;
     }
 }

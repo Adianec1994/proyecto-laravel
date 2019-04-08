@@ -17,8 +17,7 @@ class CreateMCVTable extends Migration
             Schema::create('MCV', function (Blueprint $table) {
                 $table->engine = 'InnoDB';
                 $table->increments('idMCV');
-                $table->text('nombreJefe')->nullable();
-                $table->integer('cantTrabajadores')->nullable();
+                $table->text('nombre_informa')->nullable();
                 $table->timestamps();
             });
         }

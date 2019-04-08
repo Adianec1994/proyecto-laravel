@@ -21,6 +21,7 @@ class CreateProvinciasTable extends Migration
                 $table->integer('cantidad_centrales')->nullable();
                 $table->decimal('pot_planificada')->nullable();
                 $table->integer('idEmpresas')->unsigned();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
 
                 $table->index(["idEmpresas"], 'fk_provincias_empresas_idx');

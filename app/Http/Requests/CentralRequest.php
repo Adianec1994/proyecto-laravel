@@ -48,7 +48,7 @@ class CentralRequest extends FormRequest
         return [
             'nombre'        => 'nombre de la Central Electrica',
             'cantidad_baterias'    => 'cantidad de baterias',
-            'potIndispTM'    => 'potencia indisponible por Telemecanica',
+            'potIndispTM'    => 'potencia estado por Telemecanica',
         ];
     }
 }

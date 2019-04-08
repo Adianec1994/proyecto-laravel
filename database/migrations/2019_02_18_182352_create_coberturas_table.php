@@ -26,7 +26,16 @@ class CreateCoberturasTable extends Migration
                 $table->decimal('capacTotalAlmac')->nullable();
                 $table->decimal('capacVacio')->nullable();
                 $table->decimal('existTotalDiaAnterior')->nullable();
+                $table->integer('idCElectricas')->unsigned();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
+
+                $table->index(["idCElectricas"], 'fk_coberturas_central_electricas1_idx');
+
+                $table->foreign('idCElectricas', 'fk_coberturas_central_electricas1_idx')
+                    ->references('idCElectricas')->on('central_electricas')
+                    ->onDelete('no action')
+                    ->onUpdate('no action');
             });
         }
     }

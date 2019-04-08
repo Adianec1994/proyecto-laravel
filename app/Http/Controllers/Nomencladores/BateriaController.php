@@ -20,11 +20,18 @@ class BateriaController extends Controller
      */
     public function index()
     {
-        $bateria=Bateria::all();
+        $bat=Bateria::all()->where('activo',true);
         return view('nomencladores.bateria.index')
-            ->with('baterias',$bateria);
+            ->with('baterias',$bat);
     }
 
+    /*public function getDatos(Request $request, $id){
+        if ($request->ajax()){
+          $provincia = Provincia::find($id);
+          $dato = $provincia->centralElectricas;
+            return response()->json($dato);
+        }
+    }*/
     /**
      * Show the form for creating a new resource.
      *
@@ -32,8 +39,8 @@ class BateriaController extends Controller
      */
     public function create()
     {
-        $provin = Provincia::all();
-        $cent = CentralElectrica::all();
+        $provin = Provincia::all()->where('activo',true);
+        $cent = CentralElectrica::all()->where('activo',true);
         return view('nomencladores.bateria.create')->with('provin',$provin)
             ->with('cent',$cent);
 
@@ -47,33 +54,9 @@ class BateriaController extends Controller
      */
     public function store(BateriaRequest $request)
     {
-
         Bateria::create($request->all());
+        return 'bateria';
 
-        /*if ($request->get('s_metodo') == 'PUT') {
-            $bat = Bateria::findOrFail($request->get('s_id'));
-            $bat->numero = $request->get('s_numero');
-            $bat->cantidad_grupos = $request->get('s_cantidad_grupos');
-            $bat->idProvincias = $request->get('s_provincia');
-            $bat->idEmpresas = $request->get('s_empresa');
-            $bat->idCElectricas = $request->get('s_centrales');
-            $bat->update();
-            $bateria = Bateria::all();
-            return response()->json(view('nomencladores.bateria.index')
-                ->with('baterias', $bateria)->render());
-        } else {
-
-            $bat = new Bateria();
-            $bat->numero = $request->get('s_numero');
-            $bat->cantidad_grupos = $request->get('s_cantidad_grupos');
-            $bat->idProvincias = $request->get('s_provincia');
-            $bat->idEmpresas = $request->get('s_empresa');
-            $bat->idCElectricas = $request->get('s_centrales');
-            $bat->save();
-            $bateria = Bateria::all();
-            return response()->json(view('nomencladores.bateria.index')
-                ->with('baterias', $bateria)->render());
-        }*/
     }
 
     /**
@@ -95,13 +78,16 @@ class BateriaController extends Controller
      */
     public function edit($id)
     {
-        $provin = Provincia::all();
-        $cent = CentralElectrica::all();
-        $bat=Bateria::findOrFail($id);
-        return view('nomencladores.bateria.edit')->with('bat',$bat)->with('provin',$provin)
-            ->with('cent',$cent);
-    }
 
+        $cent = CentralElectrica::all()->where('activo',true);
+        $provin = Provincia::all();
+        $bat=Bateria::find($id);
+        $bat->cent;
+        $bat->provin;
+
+        return view('nomencladores.bateria.edit')->with('cent',$cent)
+            ->with('bat',$bat)->with('provin',$provin);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -112,10 +98,8 @@ class BateriaController extends Controller
     public function update(Request $request, $id)
     {
         $bat = Bateria::find($id);
-        $bat->fill($request->all());
-        $bat->save();
-        return view('nomencladores.bateria.index')
-            ->with('baterias',$bat);
+        $bat->update($request->all());
+        return 'bateria';
     }
 
     /**
@@ -126,6 +110,9 @@ class BateriaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $bat=Bateria::find($id);
+        $bat->activo=false;
+        $bat->save();
+        return 'bateria';
     }
 }

@@ -9,13 +9,13 @@ class Cobertura extends Model
     protected $table = 'coberturas';
     protected $fillable = [
         'planReserva','fondaje','existOperativa','coberturaHoras','consumo','suminCupet',
-        'capacTotalAlmac','capacVacio','existTotalDiaAnterior'
+        'capacTotalAlmac','capacVacio','existTotalDiaAnterior','idCElectricas'
     ];
 
     protected $primaryKey = 'idCoberturas';
 
     public function centralElectrica()
     {
-        return $this->belongsTo('App\CentralElectrica', 'idCoberturas');
+        return $this->belongsTo('App\CentralElectrica', 'idCElectricas');
     }
 }

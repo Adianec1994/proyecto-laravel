@@ -18,7 +18,8 @@ class CreatePotenciasTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('idPotencias');
                 $table->decimal('cantidad')->nullable();
-                $table->string('retirado_potencia', 45)->nullable();
+                $table->boolean('retirado_potencia')->default(false);;
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

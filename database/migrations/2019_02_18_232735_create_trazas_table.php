@@ -15,7 +15,12 @@ class CreateTrazasTable extends Migration
     {
         Schema::create('trazas', function (Blueprint $table) {
             $table->increments('id');
+            $table->text('accion')->nullable();
+            $table->dateTime('fecha')->nullable();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -16,7 +16,7 @@ class IndisponiblidadController extends Controller
      */
     public function index()
     {
-        $indisponible=TiposIndisponibilidad::all();
+        $indisponible=TiposIndisponibilidad::all()->where('activo',true);
         return view('nomencladores.indisponible.index')
             ->with('tiposindisponibilidades',$indisponible);
     }
@@ -40,6 +40,7 @@ class IndisponiblidadController extends Controller
     public function store(IndisponibilidadRequest $request)
     {
         TiposIndisponibilidad::create($request->all());
+        return 'indisponible';
     }
 
     /**
@@ -64,8 +65,6 @@ class IndisponiblidadController extends Controller
         $indisp=TiposIndisponibilidad::find($id);
         return view('nomencladores.indisponible.edit',
             compact('indisp'))->render();
-        //$indisp=TiposIndisponibilidad::findOrFail($id);
-       // return view('nomencladores.indisponible.edit')->with('indisp',$indisp);
     }
 
     /**
@@ -79,26 +78,7 @@ class IndisponiblidadController extends Controller
     {
         $indisp = TiposIndisponibilidad::find($id);
         $indisp->update($request->all());
-        return view('nomencladores.indisponible.index')
-            ->with('tiposindisponibilidades',$indisp);
-       /* if($indisp->ajax())
-        {
-            $indisp = TiposIndisponibilidad::FindOrFail($id);
-            $input=$request->all();
-            $result=$indisp::fill($input)->save();
-            if($result){
-                return response()->json(['success'=>'true']);
-            }
-            else{
-                return response()->json(['success'=>'false']);
-            }
-        }*/
-
-        /*$indisp = TiposIndisponibilidad::find($id);
-        $indisp->fill($request->all());
-        $indisp->save();
-        return view('nomencladores.indisponible.index')
-            ->with('tiposindisponibilidades',$indisp);*/
+        return 'indisponible';
     }
 
     /**
@@ -109,10 +89,9 @@ class IndisponiblidadController extends Controller
      */
     public function destroy($id)
     {
-        $indisp=TiposIndisponibilidad::findOrFail($id);
-        $indisp->delete();
-        $indisp=TiposIndisponibilidad::all();
-        return view('nomencladores.indisponible.index')
-            ->with('tiposindisponibilidades',$indisp);
+        $indisp=TiposIndisponibilidad::find($id);
+        $indisp->activo=false;
+        $indisp->save();
+        return 'indisponible';
     }
 }

@@ -7,14 +7,16 @@
           <input type="hidden" name="_method" id="_method" value="POST">
 
           <div class="form-group">
-          <label>Tipo de Mantenimiento</label>
+              <h4 class="text-primary">Tipo de Mantenimiento</h4>
           <input class="form-control" name="tipo" placeholder="Tipo de Mantenimiento en Horas"
                  id="txt_tipo" onkeypress="return Numeros(event)">
           </div>
 
-        <button type="button" class="btn btn-primary btn-store btn-xs" id="mantenimiento">Salvar</button>
-        <button type="reset" class="btn btn-default btn-cancel btn-xs">Limpiar</button>
-        <button type="button" class="btn btn-default btn-volver btn-xs"
+        <button type="button" class="btn btn-info btn-store btn-modal" data-dismiss="modal" id="mantenimiento">Salvar</button>
+          &nbsp;
+          <button type="reset" class="btn btn-primary btn-cancel btn-modal">Limpiar</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger btn-volver btn-modal"
                 data-dismiss="modal" id="mantenimiento">Cancelar</button>
           <br><br><br>
       </form>

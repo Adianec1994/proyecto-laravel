@@ -43,7 +43,7 @@
 
 	<body class="no-skin">
     <!--BARRA DE NAVEGACION-->
-    <div id="navbar" class="navbar navbar-default ace-save-state">
+    <div id="navbar" class="navbar navbar-default ace-save-state navbar-collapse navbar-fixed-top h-navbar">
         <div class="navbar-container ace-save-state" id="navbar-container">
             <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                 <span class="sr-only">Toggle sidebar</span>
@@ -56,16 +56,15 @@
             </button>
 
             <div class="navbar-header pull-left">
-                <a href="" class="navbar-brand">
-                    <small style="font-size: 24px">
-                        <i class="fa fa-bolt"></i>
-                        GDIESEL &nbsp&nbsp&nbsp&nbsp
-                    </small>
-                </a>
+                <img src="{{asset('images/geysel/FaviconGD.png')}}" height="46px" class="msg-photo" alt="" />
+
 
             </div>
 
         </div><!-- /.navbar-container -->
+    </div>
+    <!--BARRA ESCONDIDA-->
+    <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     </div>
 
 		<div class="main-container ace-save-state" id="main-container">
@@ -126,7 +125,7 @@
 				<div class="main-content-inner">
 					<div class="page-content">
                         <div>
-                                <img width="1300" height="480" alt="800x500"   src="{{asset('images/mapas/cuba.jpg')}}" />
+                                <img width="1300" height="450" alt="512x161"   src="{{asset('images/mapas/cuba.jpg')}}" />
 								<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->

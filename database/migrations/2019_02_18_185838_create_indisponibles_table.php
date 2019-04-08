@@ -21,15 +21,10 @@ class CreateIndisponiblesTable extends Migration
                 $table->text('diagnostico')->nullable();
                 $table->date('fechaSolucion')->nullable();
                 $table->integer('idGrupos')->unsigned();
-                $table->integer('idPotencias')->unsigned();
                 $table->integer('idTipoIndisp')->unsigned();
-                $table->integer('idBaterias')->unsigned();
-                $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idGrupos", "idBaterias", "idCElectricas", "idProvincias", "idEmpresas", "idPotencias"], 'fk_tiposIndisponibilidades_has_grupos_grupos1_idx');
+                $table->index(["idGrupos"], 'fk_tiposIndisponibilidades_has_grupos_grupos1_idx');
 
                 $table->index(["idTipoIndisp"], 'fk_tiposIndisponibilidades_has_grupos_tiposIndisponibilidad_idx');
 

@@ -18,6 +18,7 @@ class CreateTipoMantenimientosTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('idTipoMtto');
                 $table->integer('tipo')->nullable();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

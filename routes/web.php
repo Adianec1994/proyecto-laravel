@@ -18,13 +18,22 @@ Route::get('layout', 'HomeController@index');
 Route::get('/layouts', function () {
     return view('app');
 });
-Route::post('mtto', function (){
-    return 'test';
-});
+
+
+//Route::post('mantenimientow/{{id}}','MantenimientoController@update');
+Route::get('cobertura_central/{idCElectricas}','Operaciones\CoberturaController@coberturasPorCentrales');
+Route::get('paila_central/{idCElectricas}','Operaciones\PailaController@pailasPorCentrales');
+Route::get('generacion_grupo/{idGrupos}','Operaciones\GeneracionController@generacionPorGrupos');
+Route::get('emergencia_provincia/{idProvincias}','Operaciones\EmergenciaController@emergenciaPorProvincias');
+Route::get('mcv_grupo/{idGrupos}','Operaciones\MCVController@trabajosPorGrupos');
+
+Route::get('cambiar_password','Nomencladores\Usuario@cambiarPassword');
+Route::post('usuario_nuevo_password','Nomencladores\Usuario@nuevoPassword');
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('inicio', 'HomeController@inicio');
-    //Route::post('mtto', 'Nomencladores\MantenimientoController@store');
+    Route::post('mttoedit', 'Nomencladores\MantenimientoController@update');
 
     Route::resources([
         'bateria'       => 'Nomencladores\BateriaController',
@@ -32,18 +41,20 @@ Route::group(['middleware' => ['auth']], function () {
         'empresa'       => 'Nomencladores\EmpresaController',
         'grupo'         => 'Nomencladores\GrupoController',
         'hecho'         => 'Nomencladores\HechoController',
-        'indisponible'  => 'Nomencladores\IndisponiblidadController',
+        'estado'        => 'Nomencladores\EstadoController',
         'mantenimiento' => 'Nomencladores\MantenimientoController',
-        'potencia'      => 'Nomencladores\PotenciaController',
         'provincia'     => 'Nomencladores\ProvinciaController',
         'tecnologia'    => 'Nomencladores\TecnologiaController',
-        'cobertura'     => 'Generales\CoberturaController',
+        'cobertura'     => 'Operaciones\CoberturaController',
         'datogeneral'   => 'Generales\DatoGeneralController',
         'eventodiario'  => 'Generales\EventoDiarioController',
-        'generacion'    => 'Generales\GeneracionController',
+        'generacion'    => 'Operaciones\GeneracionController',
         'glimitado'     => 'Generales\GrupoLimitadoController',
-        'mcv'           => 'Generales\MCVController',
-        'paila'         => 'Generales\PailaController'
+        'mcv'           => 'Operaciones\MCVController',
+        'paila'         => 'Operaciones\PailaController',
+        'emergencia'    => 'Operaciones\EmergenciaController',
+        'usuario'       => 'Configuracion\UsuarioController'
+
     ]);
 
 

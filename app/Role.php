@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $table = 'rol_users';
+
     protected $fillable = [
-        'name', 'description',
+        'name', 'usuarios','registros','operaciones','reportes','graficos','activo'
     ];
 
     public function users(){
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->hasMany('App\User','rol_id');
+
     }
 }

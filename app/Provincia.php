@@ -8,7 +8,7 @@ class Provincia extends Model
 {
     protected $table = 'provincias';
     protected $fillable = [
-        'nombre','cantidad_centrales','pot_planificada','idEmpresas'
+        'nombre','cantidad_centrales','pot_planificada','idEmpresas','activo'
     ];
 
     protected $primaryKey = 'idProvincias';
@@ -20,7 +20,12 @@ class Provincia extends Model
 
     public function centralElectricas()
     {
-        return $this->belongsTo('App\CentralElectrica', 'idProvincias');
+        return $this->hasMany('App\CentralElectrica', 'idProvincias');
+    }
+
+    public function emergencias()
+    {
+        return $this->hasMany('App\Emergencia', 'idProvincias');
     }
 
     public function eventosDiarios()

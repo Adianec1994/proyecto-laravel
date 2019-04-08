@@ -18,7 +18,7 @@ class ProvinciaController extends Controller
      */
     public function index()
     {
-        $provincia = Provincia::all();
+        $provincia = Provincia::all()->where('activo',true);
         return view('nomencladores.provincia.index')
             ->with('provincias', $provincia);
     }
@@ -41,10 +41,8 @@ class ProvinciaController extends Controller
      */
     public function store(ProvinciaRequest $request)
     {
-       $provincia = Provincia::all();
         Provincia::create($request->all());
-        return response()->json(view('nomencladores.provincia.index')
-          ->with('provincias', $provincia)->render());
+        return 'provincia';
     }
 
     /**
@@ -66,7 +64,7 @@ class ProvinciaController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $provin=Provincia::findOrFail($id);
+        $provin=Provincia::find($id);
         return view('nomencladores.provincia.edit')->with('prov',$provin);
     }
 
@@ -79,7 +77,9 @@ class ProvinciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return response()->json('hola estoy en el update de'.$id);
+        $provin = Provincia::find($id);
+        $provin->update($request->all());
+        return 'provincia';
     }
 
     /**
@@ -90,10 +90,10 @@ class ProvinciaController extends Controller
      */
     public function destroy($id)
     {
-            $prov=Provincia::findOrFail($id);
-            $prov->delete();
-            $provincia=Provincia::all();
-            return view('nomencladores.provincia.index')->with('provincias',$provincia);
+        $prov=Provincia::find($id);
+        $prov->activo=false;
+        $prov->save();
+        return 'provincia';
 
     }
 

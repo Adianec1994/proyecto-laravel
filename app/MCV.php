@@ -9,14 +9,23 @@ class MCV extends Model
     protected $table = 'MCV';
 
     protected $fillable = [
-        'nombreJefe','cantTrabajadores'
+        'nombre_informa'
     ];
 
     protected $primaryKey = 'idMCV';
 
-    public function grupos()
+    /*public function grupos()
     {
         return $this->belongsToMany('App\Grupo', 'trabajos',
             'idMCV', 'idGrupos')->withTimestamps();
+    }*/
+
+    public function trabajoMcv(){
+        return $this->belongsToMany('App\Grupo','trabajos','idMCV','idGrupos')
+            ->withPivot('fechaReparacion')
+            ->withPivot('tipoTrabajo')
+            ->withPivot('horaEntrada')
+            ->withPivot('horaSalida')
+            ->withPivot('estadoGrupo')->withTimestamps();
     }
 }

@@ -1,6 +1,7 @@
 $(document).ready( function () {
     $('.table').DataTable(
         {
+            'destroy':true,
             "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por pagina",
                 "zeroRecords": "Nada encontrado - lo siento",

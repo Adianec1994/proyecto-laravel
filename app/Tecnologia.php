@@ -9,13 +9,13 @@ class Tecnologia extends Model
     protected $table = 'tecnologias';
 
     protected $fillable = [
-        'tipo','serie'
+        'tipo','serie','activo'
     ];
 
     protected $primaryKey = 'idTecnologias';
 
     public function centralElectricas()
     {
-        return $this->belongsTo('App\CentralElectrica', 'idTecnologias');
+        return $this->hasMany('App\CentralElectrica', 'idTecnologias');
     }
 }

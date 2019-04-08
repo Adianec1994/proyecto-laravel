@@ -9,7 +9,7 @@ class TipoHecho extends Model
     protected $table = 'tipoHechos';
 
     protected $fillable = [
-        'tipo'
+        'tipo','activo'
     ];
 
     protected $primaryKey = 'idtipoHechos';

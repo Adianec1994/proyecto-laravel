@@ -8,14 +8,14 @@ class CentralElectrica extends Model
 {
     protected $table = 'central_electricas';
     protected $fillable = [
-        'nombre','cantidad_baterias','potIndispTM','idProvincias','idTecnologias','idCoberturas',
-        'idEmpresas','idDatosGenerales'
+        'nombre','cantidad_baterias','potIndispTM','idProvincias','idTecnologias',
+        'idDatosGenerales','activo'
     ];
 
     protected $primaryKey = 'idCElectricas';
     public function provincia()
     {
-        return $this->hasMany('App\Provincia', 'idProvincias');
+        return $this->belongsTo('App\Provincia', 'idProvincias');
     }
 
     public function datoGeneral()
@@ -25,7 +25,7 @@ class CentralElectrica extends Model
 
     public function tecnologia()
     {
-        return $this->hasMany('App\Tecnologia', 'idTecnologias');
+        return $this->belongsTo('App\Tecnologia', 'idTecnologias');
     }
 
     public function tipoMantenimientos()
@@ -36,16 +36,16 @@ class CentralElectrica extends Model
 
     public function cobertura()
     {
-        return $this->hasOne('App\Cobertura', 'idCoberturas');
+        return $this->hasOne('App\Cobertura', 'idCElectricas');
     }
 
     public function pailas()
     {
-        return $this->belongsTo('App\Paila', 'idCElectricas');
+        return $this->hasMany('App\Paila', 'idCElectricas');
     }
 
     public function baterias()
     {
-        return $this->belongsTo('App\Bateria', 'idCElectricas');
+        return $this->hasMany('App\Bateria', 'idCElectricas');
     }
 }

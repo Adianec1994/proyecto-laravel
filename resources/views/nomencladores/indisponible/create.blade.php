@@ -5,14 +5,17 @@
       <form role="form" class="create" id="form">
           <input type="hidden" class="token" value="{{csrf_token()}}">
           <div class="form-group">
-              <label>Tipo de Indisponiblidad</label>
+              <h4 class="text-primary">Tipo de Indisponiblidad</h4>
               <input class="form-control" name="tipo" placeholder="Tipo de Indisponiblidad"
                      id="txt_tipo" onkeypress="return Letras(event)">
           </div>
 
-        <button type="button" class="btn btn-primary btn-store btn-xs" id="indisponible">Salvar</button>
-        <button type="reset" class="btn btn-default btn-cancel btn-xs">Limpiar</button>
-        <button type="button" class="btn btn-default btn-volver btn-xs"
+        <button type="button" class="btn btn-info btn-store btn-modal" data-dismiss="modal"
+                id="indisponible">Salvar</button>
+          &nbsp;
+        <button type="reset" class="btn btn-primary btn-cancel btn-modal">Limpiar</button>
+          &nbsp;
+          <button type="button" class="btn btn-danger btn-volver btn-modal"
                 data-dismiss="modal" id="indisponible">Cancelar</button>
           <br><br><br>
       </form>

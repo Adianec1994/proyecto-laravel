@@ -10,14 +10,13 @@ class Generacione extends Model
 
     protected $fillable = [
         'fecha','hEntradaAM','hSalidaAM','hEntradaM','hSalidaM','hEntradaPM','hSalidaPM',
-        'reporta','tiempoOperacion','idGrupos','idBaterias','idCElectricas','idProvincias',
-        'idEmpresas','idPotencias'
+        'reporta','tiempoOperacion','idGrupos'
     ];
 
     protected $primaryKey = 'idGener';
 
     public function grupo()
     {
-        return $this->hasMany('App\Grupo', 'idGrupos');
+        return $this->belongsTo('App\Grupo', 'idGrupos');
     }
 }

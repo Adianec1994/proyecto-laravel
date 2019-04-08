@@ -20,11 +20,10 @@ class CreateBateriasTable extends Migration
                 $table->integer('numero')->nullable();
                 $table->integer('cantidad_grupos')->nullable();
                 $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
 
-                $table->index(["idCElectricas", "idProvincias", "idEmpresas"], 'fk_baterias_central_electricas1_idx');
+                $table->index(["idCElectricas"], 'fk_baterias_central_electricas1_idx');
 
                 $table->foreign('idCElectricas', 'fk_baterias_central_electricas1_idx')
                     ->references('idCElectricas')->on('central_electricas')

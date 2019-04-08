@@ -16,7 +16,7 @@ class TecnologiaController extends Controller
      */
     public function index()
     {
-        $tecnologia=Tecnologia::all();
+        $tecnologia=Tecnologia::all()->where('activo',true);
         return view('nomencladores.tecnologia.index')
             ->with('tecnologias',$tecnologia);
     }
@@ -40,6 +40,7 @@ class TecnologiaController extends Controller
     public function store(TecnologiaRequest $request)
     {
         Tecnologia::create($request->all());
+        return 'tecnologia';
     }
 
     /**
@@ -61,7 +62,7 @@ class TecnologiaController extends Controller
      */
     public function edit($id)
     {
-        $tecno=Tecnologia::findOrFail($id);
+        $tecno=Tecnologia::find($id);
         return view('nomencladores.tecnologia.edit')->with('tecno',$tecno);
     }
 
@@ -74,14 +75,9 @@ class TecnologiaController extends Controller
      */
     public function update(Request $request, $id)
     {
-      /*  $tecno = Tecnologia::find($id);
-        $tecno->fill($request->all());
-        $tecno->save();
-        return view('nomencladores.tecnologia.index')
-            ->with('tecnologias',$tecno);  */
         $tecno = Tecnologia::find($id);
         $tecno->update($request->all());
-        return view('nomencladores.tecnologia.index');
+        return 'tecnologia';
     }
 
     /**
@@ -92,10 +88,9 @@ class TecnologiaController extends Controller
      */
     public function destroy($id)
     {
-        $tecno=Tecnologia::findOrFail($id);
-        $tecno->delete();
-        $tecno=Tecnologia::all();
-        return view('nomencladores.tecnologia.index')
-            ->with('tecnologias',$tecno);
+        $tecno=Tecnologia::find($id);
+        $tecno->activo=false;
+        $tecno->save();
+        return 'tecnologia';
     }
 }

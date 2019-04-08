@@ -18,7 +18,7 @@ class CreateEmpresasTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('idEmpresas');
                 $table->text('nombre')->nullable();
-                $table->integer('cantidad_provincias')->nullable();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

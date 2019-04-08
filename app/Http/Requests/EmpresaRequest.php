@@ -24,8 +24,7 @@ class EmpresaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre'                    => 'required|min:3|max:30',
-            'cantidad_provincias'       => 'required|integer',
+            'nombre'                    => 'required|min:3|max:30'
         ];
     }
     public function messages()
@@ -33,10 +32,7 @@ class EmpresaRequest extends FormRequest
         return [
             'nombre.required'     => 'El :attribute es obligatorio.',
             'nombre.min'          => 'El :attribute debe contener mas de 3 caracteres.',
-            'nombre.max'          => 'El :attribute debe contener max 30 caracteres.',
-
-            'cantidad_provincias.required'    => 'La :attribute es obligatoria.',
-            'cantidad_provincias.integer'     => 'La :attribute debe ser un entero.',
+            'nombre.max'          => 'El :attribute debe contener max 30 caracteres.'
 
         ];
     }
@@ -44,7 +40,6 @@ class EmpresaRequest extends FormRequest
     {
         return [
             'nombre'        => 'nombre de la Empresa',
-            'cantidad_provincias'    => 'cantidad de Provincias',
         ];
     }
 }

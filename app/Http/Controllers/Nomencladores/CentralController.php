@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Nomencladores;
 
-use App\Cobertura;
+
 use App\Http\Requests\CentralRequest;
 use App\Provincia;
 use App\Tecnologia;
@@ -19,13 +19,13 @@ class CentralController extends Controller
      */
     public function index()
     {
-        $provin = Provincia::all();
-        $tecno = Tecnologia::all();
-        $cob = Cobertura::all();
-        $central=CentralElectrica::all();
+        $provin = Provincia::all()->where('activo',true);
+        $tecno = Tecnologia::all()->where('activo',true);
+        $central=CentralElectrica::all()->where('activo',true);
+
         return view('nomencladores.central.index')
             ->with('central_electricas',$central)->with('provin',$provin)
-            ->with('tecno',$tecno)->with('cob',$cob);
+            ->with('tecno',$tecno);
     }
 
 
@@ -36,11 +36,10 @@ class CentralController extends Controller
      */
     public function create()
     {
-        $provin = Provincia::all();
-        $tecno = Tecnologia::all();
-        $cob = Cobertura::all();
+        $provin = Provincia::all()->where('activo',true);
+        $tecno = Tecnologia::all()->where('activo',true);
         return view('nomencladores.central.create')->with('provin',$provin)
-            ->with('tecno',$tecno)->with('cob',$cob);
+            ->with('tecno',$tecno);
     }
 
 /**
@@ -51,40 +50,9 @@ class CentralController extends Controller
      */
     public function store(CentralRequest $request)
     {
-
         CentralElectrica::create($request->all());
+        return 'central';
 
-        /*  dd($request->all());
-        if ($request->get('s_metodo') == 'PUT') {
-            $cent = CentralElectrica::findOrFail($request->get('s_id'));
-            $cent->nombre = $request->get('s_nombre');
-            $cent->cantidad_baterias = $request->get('s_cantidad_baterias');
-            $cent->potIndispTM = $request->get('s_potIndispTM');
-            $cent->idProvincias = $request->get('s_provincia');
-            $cent->idEmpresas = $request->get('s_empresa');
-            $cent->idDatosGenerales = $request->get('s_datosgen');
-            $cent->idTecnologias = $request->get('s_tecnologia');
-            $cent->idCoberturas = $request->get('s_cobertura');
-            $cent->update();
-            $central = CentralElectrica::all();
-            return response()->json(view('nomencladores.central.index')
-                ->with('central_electricas', $central)->render());
-        } else {
-
-            $cent = new CentralElectrica();
-            $cent->nombre = $request->get('s_nombre');
-            $cent->cantidad_baterias = $request->get('s_cantidad_baterias');
-            $cent->potIndispTM = $request->get('s_potIndispTM');
-            $cent->idProvincias = $request->get('s_provincia');
-            $cent->idEmpresas = $request->get('s_empresa');
-            $cent->idDatosGenerales = $request->get('s_datosgen');
-            $cent->idTecnologias = $request->get('s_tecnologia');
-            $cent->idCoberturas = $request->get('s_cobertura');
-            $cent->save();
-            $central = CentralElectrica::all();
-            return response()->json(view('nomencladores.central.index')
-                ->with('central_electricas', $central)->render());
-        } */
     }
 
     /**
@@ -108,14 +76,12 @@ class CentralController extends Controller
     {
         $provin = Provincia::all();
         $tecno = Tecnologia::all();
-        $cob = Cobertura::all();
-        $cent=CentralElectrica::findOrFail($id);
+        $cent=CentralElectrica::find($id);
         $cent->tecnologia;
         $cent->provincia;
-        $cent->cobertura;
 
         return view('nomencladores.central.edit')->with('provin',$provin)
-            ->with('tecno',$tecno)->with('cob',$cob)->with('cent',$cent);
+            ->with('tecno',$tecno)->with('cent',$cent);
     }
 
     /**
@@ -129,10 +95,8 @@ class CentralController extends Controller
     {
 
        $cent = CentralElectrica::find($id);
-       $cent->fill($request->all());
-       $cent->save();
-        return view('nomencladores.central.index')
-            ->with('central_electricas',$cent);
+        $cent->update($request->all());
+        return 'central';
     }
 
     /**
@@ -143,10 +107,9 @@ class CentralController extends Controller
      */
     public function destroy($id)
     {
-        $cent=CentralElectrica::findOrFail($id);
-        $cent->delete();
-        $cent=CentralElectrica::all();
-        return view('nomencladores.central.index')
-            ->with('central_electricas',$cent);
+        $cent=CentralElectrica::find($id);
+        $cent->activo=false;
+        $cent->save();
+        return 'central';
     }
 }

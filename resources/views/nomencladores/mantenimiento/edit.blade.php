@@ -1,22 +1,19 @@
 <div class="panel panel-primary">
     <div class="panel-body">
         <div class="col-md-6">
-            <form role="form" id="form" class="create">
-                <input type="hidden" name="idTipoMtto" id="idTipoMtto" value="{{$mtto->idTipoMtto}}">
-                <input type="hidden" class="token" value="{{csrf_token()}}">
-                <input type="hidden" name="_method" id="_method" value="PUT">
-
+            <form role="form" method="POST" id="form" class="update" action="mantenimiento/{{$mtto->idTipoMtto}}" enctype="multipart/form-data">
+                {{csrf_field()}}
+                <input type="hidden" id="method" value="POST">
                 <div class="form-group">
-                    <label>Tipo de Mantenimiento</label>
-                    <input class="form-control" name="tipo" placeholder="Tipo de Mantenimiento en Horas"
-                           id="txt_tipo" value="{{$mtto->tipo}}" onkeypress="return Numeros(event)">
+                    <h4 class="text-primary">Tipo de Mantenimiento</h4>
+                    <input class="form-control" name="tipo" id="txt_tipo" value="{{$mtto->tipo}}" onkeypress="return Numeros(event)">
                 </div>
 
-
-
-                    <button type="button" class="btn btn-primary btn-store btn-xs" id="mantenimiento">Actualizar</button>
-                    <button type="reset" class="btn btn-default btn-xs">Limpiar</button>
-                    <button type="button" class="btn btn-default btn-volver btn-xs"
+                    <button type="button" class="btn btn-info btn-update btn-xs"  data-dismiss="modal" id="mantenimiento">Actualizar</button>
+                    &nbsp;
+                    <button type="reset" class="btn btn-primary btn-xs">Limpiar</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger btn-volver btn-xs"
                             data-dismiss="modal" id="mantenimiento">Cancelar</button>
                 </form>
             </div>

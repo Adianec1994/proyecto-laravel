@@ -25,10 +25,9 @@ class CreateHechosextraordinariosTable extends Migration
                 $table->text('nombreInforma')->nullable();
                 $table->integer('idtipoHechos')->unsigned();
                 $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idProvincias", "idEmpresas"], 'fk_tipoHechos_has_provincias_provincias1_idx');
+                $table->index(["idProvincias"], 'fk_tipoHechos_has_provincias_provincias1_idx');
 
                 $table->index(["idtipoHechos"], 'fk_tipoHechos_has_provincias_tipoHechos1_idx');
 

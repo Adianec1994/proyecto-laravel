@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Nomencladores;
 
 use App\Http\Requests\MantenimientoRequest;
-use App\TiposIndisponibilidad;
+use App\Estado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\TipoMantenimiento;
+use Illuminate\Http\Response;
 
 
 class MantenimientoController extends Controller
@@ -18,7 +19,7 @@ class MantenimientoController extends Controller
      */
     public function index()
     {
-        $mantenimiento=TipoMantenimiento::all();
+        $mantenimiento=TipoMantenimiento::all()->where('activo',true);
         return view('nomencladores.mantenimiento.index')
             ->with('tipomantenimientos',$mantenimiento);
     }
@@ -41,14 +42,8 @@ class MantenimientoController extends Controller
      */
     public function store(MantenimientoRequest $request)
     {
-        $test=$request->get('_method');
-        return response()->json($test);
-
-    /*  $mtto=TipoMantenimiento::all();
         TipoMantenimiento::create($request->all());
-        return response()->json(view('nomencladores.mantenimiento.index')
-            ->with('tipomantenimientos', $mtto)->render());*/
-
+        return 'mantenimiento';
 
     }
 
@@ -60,7 +55,9 @@ class MantenimientoController extends Controller
      */
     public function show($id)
     {
-
+        $mtto=TipoMantenimiento::find($id);
+        return view('nomencladores.mantenimiento.edit',
+            compact('mtto'))->render();
     }
 
     /**
@@ -86,22 +83,9 @@ class MantenimientoController extends Controller
     public function update(Request $request, $id)
     {
 
-        //prueba
-      /* $mtto=TipoMantenimiento::find($id);
-       $mtto->tipo=$request->get('tipo');
-       $mtto->save();
-        return view('nomencladores.mantenimiento.index')
-            ->with('tipomantenimientos',$mtto);*/
-
-      /*  $mantenimiento=TipoMantenimiento::all();
-        TipoMantenimiento::update($request->all());
-        return response()->json(view('nomencladores.mantenimiento.index')
-            ->with('tipomantenimientos', $mantenimiento)->render());*/
-
-       /* $mtto = TipoMantenimiento::find($id);
+        $mtto = TipoMantenimiento::find($id);
         $mtto->update($request->all());
-        return view('nomencladores.mantenimiento.index')
-            ->with('tipomantenimientos',$mtto);*/
+        return 'mantenimiento';
 
     }
 
@@ -114,10 +98,9 @@ class MantenimientoController extends Controller
     public function destroy($id)
     {
 
-        $mtto=TipoMantenimiento::findOrFail($id);
-        $mtto->delete();
-        $mtto=TipoMantenimiento::all();
-        return view('nomencladores.mantenimiento.index')
-            ->with('tipomantenimientos',$mtto);
+        $mtto=TipoMantenimiento::find($id);
+        $mtto->activo=false;
+        $mtto->save();
+        return 'mantenimiento';
     }
 }

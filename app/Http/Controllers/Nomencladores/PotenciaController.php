@@ -16,7 +16,7 @@ class PotenciaController extends Controller
      */
     public function index()
     {
-        $potencia=Potencia::all();
+        $potencia=Potencia::all()->where('activo',true);
         return view('nomencladores.potencia.index')
             ->with('potencias',$potencia);
     }
@@ -39,7 +39,9 @@ class PotenciaController extends Controller
      */
     public function store(PotenciaRequest $request)
     {
+
         Potencia::create($request->all());
+        return 'potencia';
     }
 
     /**
@@ -61,8 +63,9 @@ class PotenciaController extends Controller
      */
     public function edit($id)
     {
-        $pot=Potencia::findOrFail($id);
-        return view('nomencladores.potencia.edit')->with('pot',$pot);
+        $pot=Potencia::find($id);
+        return view('nomencladores.potencia.edit',
+            compact('pot'))->render();
     }
 
     /**
@@ -75,10 +78,8 @@ class PotenciaController extends Controller
     public function update(Request $request, $id)
     {
         $pot = Potencia::find($id);
-        $pot->fill($request->all());
-        $pot->save();
-        return view('nomencladores.potencia.index')
-            ->with('potencias',$pot);
+        $pot->update($request->all());
+        return 'potencia';
     }
 
     /**
@@ -89,10 +90,9 @@ class PotenciaController extends Controller
      */
     public function destroy($id)
     {
-        $pot=Potencia::findOrFail($id);
-        $pot->delete();
-        $pot=Potencia::all();
-        return view('nomencladores.potencia.index')
-            ->with('potencias',$pot);
+        $pot=Potencia::find($id);
+        $pot->activo=false;
+        $pot->save();
+        return 'potencia';
     }
 }

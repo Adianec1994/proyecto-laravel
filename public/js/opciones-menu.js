@@ -40,18 +40,43 @@ $(function() {
         $('#contenido').load(url).fadeIn(500);
     });
 
-    $('#indisponible').click(function () {
-        var url = 'indisponible';
-        $('#contenido').load(url).fadeIn(500);
-    });
-
-    $('#potencia').click(function () {
-        var url = 'potencia';
+    $('#estado').click(function () {
+        var url = 'estado';
         $('#contenido').load(url).fadeIn(500);
     });
 
     $('#hecho').click(function () {
         var url = 'hecho';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#cobertura').click(function () {
+        var url = 'cobertura';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#paila').click(function () {
+        var url = 'paila';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#generacion').click(function () {
+        var url = 'generacion';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#emergencia').click(function () {
+        var url = 'emergencia';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#mcv').click(function () {
+        var url = 'mcv';
+        $('#contenido').load(url).fadeIn(500);
+    });
+
+    $('#usuario').click(function () {
+        var url = 'usuario';
         $('#contenido').load(url).fadeIn(500);
     });
 
@@ -63,16 +88,13 @@ $(function() {
         $('.modal-body').load(url);
     });
 
-
-    $(document).on("click",".btn-edit",function () {
-        var url=$(this).attr('id');
-        $('.modal-body').load(url);
-    });
-
     $(document).on("click",".btn-volver",function () {
         var url=$(this).attr('id');
         $('#contenido').load(url);
     });
+
+
+
 
 
 });

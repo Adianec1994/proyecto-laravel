@@ -8,18 +8,19 @@ class Bateria extends Model
 {
     protected $table = 'baterias';
     protected $fillable = [
-        'numero','cantidad_grupos','idCElectricas','idProvincias','idEmpresas'
+        'numero','cantidad_grupos','idCElectricas','activo'
     ];
 
     protected $primaryKey = 'idBaterias';
+
     public function centralElectrica()
     {
-        return $this->hasMany('App\CentralElectrica', 'idCElectricas');
+        return $this->belongsTo('App\CentralElectrica', 'idCElectricas');
     }
 
     public function grupos()
     {
-        return $this->belongsTo('App\Grupo', 'idBaterias');
+        return $this->hasMany('App\Grupo', 'idBaterias');
     }
 
 

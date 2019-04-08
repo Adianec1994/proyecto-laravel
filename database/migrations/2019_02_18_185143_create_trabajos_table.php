@@ -22,18 +22,11 @@ class CreateTrabajosTable extends Migration
                 $table->time('horaEntrada')->nullable();
                 $table->time('horaSalida')->nullable();
                 $table->text('estadoGrupo')->nullable();
-                $table->text('informa')->nullable();
-                $table->string('garantia', 45)->nullable();
                 $table->integer('idMCV')->unsigned();
-                $table->integer('idPotencias')->unsigned();
                 $table->integer('idGrupos')->unsigned();
-                $table->integer('idBaterias')->unsigned();
-                $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idGrupos", "idBaterias", "idCElectricas", "idProvincias", "idEmpresas", "idPotencias"], 'fk_MCV_has_grupos_grupos1_idx');
+                $table->index(["idGrupos"], 'fk_MCV_has_grupos_grupos1_idx');
 
                 $table->index(["idMCV"], 'fk_MCV_has_grupos_MCV1_idx');
 

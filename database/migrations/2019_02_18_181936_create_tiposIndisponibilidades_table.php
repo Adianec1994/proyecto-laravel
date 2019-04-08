@@ -18,6 +18,7 @@ class CreateTiposindisponibilidadesTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('idTipoIndisp');
                 $table->text('tipo')->nullable();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

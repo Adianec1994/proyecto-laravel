@@ -21,17 +21,14 @@ class CreateCentralElectricasTable extends Migration
                 $table->integer('cantidad_baterias')->nullable();
                 $table->decimal('potIndispTM')->nullable();
                 $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->integer('idDatosGenerales')->unsigned();
                 $table->integer('idTecnologias')->unsigned();
-                $table->integer('idCoberturas')->unsigned();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
 
                 $table->index(["idDatosGenerales"], 'fk_central_electricas_datosGenerales1_idx');
 
-                $table->index(["idCoberturas"], 'fk_central_electricas_coberturas1_idx');
-
-                $table->index(["idProvincias", "idEmpresas"], 'fk_central_electricas_provincias1_idx');
+                $table->index(["idProvincias"], 'fk_central_electricas_provincias1_idx');
 
                 $table->index(["idTecnologias"], 'fk_central_electricas_tecnologias1_idx');
 
@@ -50,10 +47,6 @@ class CreateCentralElectricasTable extends Migration
                     ->onDelete('no action')
                     ->onUpdate('no action');
 
-                $table->foreign('idCoberturas', 'fk_central_electricas_coberturas1_idx')
-                    ->references('idCoberturas')->on('coberturas')
-                    ->onDelete('no action')
-                    ->onUpdate('no action');
             });
         }
     }

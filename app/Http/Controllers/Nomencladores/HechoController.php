@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Nomencladores;
 
 use App\Http\Requests\HechoRequest;
 use App\TipoHecho;
-use App\TiposIndisponibilidad;
+use App\Estado;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +18,7 @@ class HechoController extends Controller
      */
     public function index()
     {
-        $hecho=TipoHecho::all();
+        $hecho=TipoHecho::all()->where('activo',true);
         return view('nomencladores.hecho.index')->with('tipohechos',$hecho);
     }
 
@@ -41,6 +41,7 @@ class HechoController extends Controller
     public function store(HechoRequest $request)
     {
         TipoHecho::create($request->all());
+        return 'hecho';
     }
 
     /**
@@ -62,8 +63,9 @@ class HechoController extends Controller
      */
     public function edit($id)
     {
-        $hec=TipoHecho::findOrFail($id);
-        return view('nomencladores.hecho.edit')->with('hec',$hec);
+        $hec=TipoHecho::find($id);
+        return view('nomencladores.hecho.edit',
+            compact('hec'))->render();
     }
 
     /**
@@ -76,10 +78,8 @@ class HechoController extends Controller
     public function update(Request $request, $id)
     {
         $hec = TipoHecho::find($id);
-        $hec->fill($request->all());
-        $hec->save();
-        return view('nomencladores.hecho.index')
-            ->with('tipohechos',$hec);
+        $hec->update($request->all());
+        return 'hecho';
     }
 
     /**
@@ -90,10 +90,9 @@ class HechoController extends Controller
      */
     public function destroy($id)
     {
-        $hec=TipoHecho::findOrFail($id);
-        $hec->delete();
-        $hec=TipoHecho::all();
-        return view('nomencladores.hecho.index')
-            ->with('tipohechos',$hec);
+        $hec=TipoHecho::find($id);
+        $hec->activo=false;
+        $hec->save();
+        return 'hecho';
     }
 }

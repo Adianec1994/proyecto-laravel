@@ -47,14 +47,11 @@
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
-                    <div class="center">
-                        <h1>
-                            <i class="ace-icon fa fa-bolt red"></i>
-                            <span class="red">G</span>
-                            <span class="blue" id="id-text2">Diesel</span>
-                        </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Geysel</h4>
-                    </div>
+
+                        <div class="center">
+                            <img src="{{asset('images/geysel/gestion_diesel_logo.png')}}" height="90px"
+                                  class="msg-photo" alt="" />
+                        </div>
 
                     <div class="space-6"></div>
 

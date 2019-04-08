@@ -11,6 +11,7 @@
 
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/style.css')}}" />
     <link rel="stylesheet" href="{{asset('font-awesome/4.5.0/css/font-awesome.min.css')}}" />
 
     <!-- page specific plugin styles -->
@@ -23,7 +24,22 @@
     <![endif]-->
     <link rel="stylesheet" href="{{asset('css/ace-skins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/ace-rtl.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/datatables.bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap4.css')}}" />
+
+
+    <link rel="stylesheet" href="{{asset('css/site.css')}}" />
+
+    <!--plugins para fechas y horas-->
+    <link rel="stylesheet" href="{{asset('css/bootstrap-timepicker.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker3.min.css')}}" />
+
+
+<!--Otros plugins-->
+    <link rel="stylesheet" href="{{asset('css/plugins/animate.min.css')}}" />
+
+
+
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="{{asset('css/ace-ie.min.css')}}" />
     <![endif]-->
@@ -44,7 +60,7 @@
 
 	<body class="no-skin">
     <!--BARRA DE NAVEGACION-->
-    <div id="navbar" class="navbar navbar-default ace-save-state">
+    <div id="navbar" class="navbar navbar-default ace-save-state navbar-collapse navbar-fixed-top h-navbar">
         <div class="navbar-container ace-save-state" id="navbar-container">
             <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
                 <span class="sr-only">Toggle sidebar</span>
@@ -57,12 +73,7 @@
             </button>
 
             <div class="navbar-header pull-left">
-                <a href="" class="navbar-brand">
-                    <small style="font-size: 24px">
-                        <i class="fa fa-bolt"></i>
-                        GDIESEL
-                    </small>
-                </a>
+                <img src="{{asset('images/geysel/FaviconGD.png')}}" height="46px" class="msg-photo" alt="" />
 
             </div>
 
@@ -363,24 +374,8 @@
             </div>
         </div><!-- /.navbar-container -->
     </div>
-   <!--BARRA DE BUSQUEDA-->
+   <!--BARRA ESCONDIDA-->
     <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-        <ul class="breadcrumb">
-            <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="">Inicio</a>
-            </li>
-            <li class="active">Menú Principal</li>
-        </ul><!-- /.breadcrumb -->
-
-        <div class="nav-search" id="nav-search">
-            <form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Buscar ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="ace-icon fa fa-search nav-search-icon"></i>
-								</span>
-            </form>
-        </div><!-- /.nav-search -->
     </div>
 
     @include('layout.opciones')
@@ -388,9 +383,7 @@
 
     <!--Contenido de las vistas-->
     <div class="container container-fluid col-md-12" id="contenido">
-
-    @yield('content')
-
+        @yield('content')
     </div>
 
 
@@ -428,7 +421,8 @@
 
 		<!--[if !IE]> -->
 		<script src="{{asset('js/jquery-3.3.1.js')}}"></script>
-        <script src="{{asset('js/jquery-1.11.3.min.js')}}"></script>
+    <script src="{{asset('js/plugins/jquery.min.js')}}"></script>
+    <script src="{{asset('js/plugins/jquery.ui.min.js')}}"></script>
 
 		<!-- <![endif]-->
 
@@ -442,14 +436,22 @@
 
 		<script src="{{asset('js/ace-elements.min.js')}}"></script>
 		<script src="{{asset('js/ace.min.js')}}"></script>
-        <script src="{{asset('js/datatables.bootstrap.min.js')}}"></script>
+
         <script src="{{asset('js/jquery.dataTables.js')}}"></script>
+        <script src="{{asset('js/dataTables.bootstrap4.js')}}"></script>
 
     <!--alertas-->
     <script src="{{asset('js/sweetalert2.all.min.js')}}"></script>
 
     <!--Menu -->
     <script src="{{asset('js/opciones-menu.js')}}"></script>
+
+    <!--Para poner hora y fecha -->
+    <script src="{{asset('js/bootstrap-timepicker.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{asset('js/plugins/jquery.mask.min.js')}}"></script>
+
+
 
 
 
@@ -507,13 +509,18 @@
 			 $(window).on('resize.ace.top_menu', function() {
 				$(document).triggerHandler('settings.ace.top_menu', ['sidebar_fixed' , $sidebar.hasClass('sidebar-fixed')]);
 			 });
-			
-			
+
+
+
 			});
+
+
+
+
 		</script>
 	</body>
 
-<!-- Modal -->
+{{-- Ventana Modal --}}
 <div class="modal fade bs-example-modal-sm" tabindex="-1" data-keyboard='false' data-backdrop='static'
      id="myModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-success" role="document">
@@ -521,9 +528,10 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span></button>
+                    <span class="sr-only">Close</span></button><br>
 
             </div>
+
             <div class="modal-body" id="modal-body">
                 ...
             </div>

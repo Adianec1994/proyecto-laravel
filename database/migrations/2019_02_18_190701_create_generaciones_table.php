@@ -27,14 +27,9 @@ class CreateGeneracionesTable extends Migration
                 $table->text('reporta')->nullable();
                 $table->time('tiempoOperacion')->nullable();
                 $table->integer('idGrupos')->unsigned();
-                $table->integer('idBaterias')->unsigned();
-                $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
-                $table->integer('idPotencias')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idGrupos", "idBaterias", "idCElectricas", "idProvincias", "idEmpresas", "idPotencias"], 'fk_generaciones_grupos1_idx');
+                $table->index(["idGrupos"], 'fk_generaciones_grupos1_idx');
 
                 $table->foreign('idGrupos', 'fk_generaciones_grupos1_idx')
                     ->references('idGrupos')->on('grupos')

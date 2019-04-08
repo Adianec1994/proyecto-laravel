@@ -9,13 +9,13 @@ class Potencia extends Model
     protected $table = 'potencias';
 
     protected $fillable = [
-        'cantidad','retirado_potencia'
+        'cantidad','activo'
     ];
 
     protected $primaryKey = 'idPotencias';
 
     public function grupos()
     {
-        return $this->belongsTo('App\Grupo', 'idPotencias');
+        return $this->hasMany('App\Grupo', 'idPotencias');
     }
 }

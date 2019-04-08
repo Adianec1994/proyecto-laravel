@@ -10,7 +10,7 @@ class Grupo extends Model
 
     protected $fillable = [
         'numero','pot_instalada','pot_disponible','potIndispMtto','potIndispAveria',
-        'idBaterias','idCElectricas','idProvincias','idEmpresas','idPotencias'
+        'idBaterias','idEstados','activo'
     ];
 
     protected $primaryKey = 'idGrupos';
@@ -22,7 +22,7 @@ class Grupo extends Model
 
     public function bateria()
     {
-        return $this->hasMany('App\Bateria', 'idBaterias');
+        return $this->belongsTo('App\Bateria', 'idBaterias');
     }
 
     public function grupoLimitado()
@@ -30,25 +30,29 @@ class Grupo extends Model
         return $this->belongsTo('App\GruposLimitado', 'idGrupos');
     }
 
-    public function MCVs()
+    public function generaciones()
+    {
+        return $this->hasMany('App\Generacione', 'idGrupos');
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo('App\Estado', 'idEstados');
+    }
+
+    /*public function MCVs()
     {
         return $this->belongsToMany('App\MCV', 'trabajos',
             'idGrupos', 'idMCV')->withTimestamps();
+    }*/
+
+    public function trabajoMcv(){
+        return $this->belongsToMany('App\MCV','trabajos','idGrupos','idMCV')
+            ->withPivot('fechaReparacion')
+            ->withPivot('tipoTrabajo')
+            ->withPivot('horaEntrada')
+            ->withPivot('horaSalida')
+            ->withPivot('estadoGrupo')->withTimestamps();
     }
 
-    public function generaciones()
-    {
-        return $this->belongsTo('App\Generacione', 'idGrupos');
-    }
-
-    public function potencia()
-    {
-        return $this->hasMany('App\Potencia', 'idPotencias');
-    }
-
-    public function tiposIndisponibilidades()
-    {
-        return $this->belongsToMany('App\TiposIndisponibilidad', 'indisponibles',
-            'idGrupos', 'idTipoIndisp')->withTimestamps();
-    }
 }

@@ -18,6 +18,7 @@ class CreateTipoHechosTable extends Migration
                 $table->engine = 'InnoDB';
                 $table->increments('idtipoHechos');
                 $table->text('tipo')->nullable();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

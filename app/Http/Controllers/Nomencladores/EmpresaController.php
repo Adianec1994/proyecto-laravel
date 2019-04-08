@@ -16,7 +16,7 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresa=Empresa::all();
+        $empresa=Empresa::all()->where('activo',true);
         return view('nomencladores.empresa.index')
             ->with('empresas',$empresa);
     }
@@ -40,6 +40,7 @@ class EmpresaController extends Controller
     public function store(EmpresaRequest $request)
     {
         Empresa::create($request->all());
+        return 'empresa';
 
     }
 
@@ -62,7 +63,7 @@ class EmpresaController extends Controller
      */
     public function edit(Request $request, $id)
     {
-        $emp=Empresa::findOrFail($id);
+        $emp=Empresa::find($id);
         return view('nomencladores.empresa.edit')->with('emp',$emp);
     }
 
@@ -77,12 +78,8 @@ class EmpresaController extends Controller
     {
        // return response()->json('hola estoy en el update'.$id);
         $emp = Empresa::find($id);
-        $emp->fill($request->all());
-        $emp->save();
-
-        return response()->json([
-            "mensaje" =>"listo"
-        ]);
+        $emp->update($request->all());
+        return 'empresa';
     }
 
     /**
@@ -93,11 +90,10 @@ class EmpresaController extends Controller
      */
     public function destroy($id)
     {
-        $emp=Empresa::findOrFail($id);
-            $emp->delete();
-            $emp=Empresa::all();
-            return view('nomencladores.empresa.index')
-                ->with('empresas',$emp);
+        $emp=Empresa::find($id);
+        $emp->activo=false;
+        $emp->save();
+        return 'empresa';
 
     }
 

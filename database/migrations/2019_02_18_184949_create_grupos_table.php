@@ -23,23 +23,21 @@ class CreateGruposTable extends Migration
                 $table->decimal('potIndispMtto')->nullable();
                 $table->decimal('potIndispAveria')->nullable();
                 $table->integer('idBaterias')->unsigned();
-                $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
-                $table->integer('idPotencias')->unsigned();
+                $table->integer('idEstados')->unsigned();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
 
-                $table->index(["idPotencias"], 'fk_grupos_potencias1_idx');
 
-                $table->index(["idBaterias", "idCElectricas", "idProvincias", "idEmpresas"], 'fk_grupos_baterias1_idx');
+                $table->index(["idEstados"], 'fk_grupos_estados1_idx');
+                $table->index(["idBaterias"], 'fk_grupos_baterias1_idx');
 
                 $table->foreign('idBaterias', 'fk_grupos_baterias1_idx')
                     ->references('idBaterias')->on('baterias')
                     ->onDelete('no action')
                     ->onUpdate('no action');
 
-                $table->foreign('idPotencias', 'fk_grupos_potencias1_idx')
-                    ->references('idPotencias')->on('potencias')
+                $table->foreign('idEstados', 'fk_grupos_estados1_idx')
+                    ->references('idEstados')->on('estados')
                     ->onDelete('no action')
                     ->onUpdate('no action');
             });

@@ -19,6 +19,7 @@ class CreateTecnologiasTable extends Migration
                 $table->increments('idTecnologias');
                 $table->text('tipo')->nullable();
                 $table->integer('serie')->nullable();
+                $table->boolean('activo')->default(true);
                 $table->timestamps();
             });
         }

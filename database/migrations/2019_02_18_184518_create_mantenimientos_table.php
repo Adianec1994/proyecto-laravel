@@ -22,14 +22,10 @@ class CreateMantenimientosTable extends Migration
                 $table->integer('numeroBrigada')->nullable();
                 $table->time('cantHoras')->nullable();
                 $table->integer('idTipoMtto')->unsigned();
-                $table->integer('idDatosGenerales')->unsigned();
-                $table->integer('idTecnologias')->unsigned();
                 $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idCElectricas", "idProvincias", "idEmpresas", "idDatosGenerales", "idTecnologias"], 'fk_tipoMantenimientos_has_central_electricas_central_electr_idx');
+                $table->index(["idCElectricas"], 'fk_tipoMantenimientos_has_central_electricas_central_electr_idx');
 
                 $table->index(["idTipoMtto"], 'fk_tipoMantenimientos_has_central_electricas_tipoMantenimie_idx');
 

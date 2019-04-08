@@ -22,21 +22,17 @@ class CreatePailasTable extends Migration
                 $table->decimal('comb_factura')->nullable();
                 $table->decimal('comb_medicion')->nullable();
                 $table->text('nombre_Chofer')->nullable();
-                $table->integer('ci_chofer')->nullable();
+                $table->bigInteger('ci_chofer')->nullable();
                 $table->text('nombre_Acomp')->nullable();
-                $table->integer('ci_acompte')->nullable();
+                $table->bigInteger('ci_acompte')->nullable();
                 $table->text('nombre_Recibe')->nullable();
-                $table->integer('ci_recibe')->nullable();
+                $table->bigInteger('ci_recibe')->nullable();
                 $table->text('acciones')->nullable();
                 $table->integer('idCElectricas')->unsigned();
-                $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
-                $table->integer('idDatosGenerales')->unsigned();
-                $table->integer('idTecnologias')->unsigned();
-                $table->integer('idCoberturas')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idCElectricas", "idProvincias", "idEmpresas", "idDatosGenerales", "idTecnologias", "idCoberturas"], 'fk_pailas_central_electricas1_idx');
+
+                $table->index(["idCElectricas"], 'fk_pailas_central_electricas1_idx');
 
                 $table->foreign('idCElectricas', 'fk_pailas_central_electricas1_idx')
                     ->references('idCElectricas')->on('central_electricas')

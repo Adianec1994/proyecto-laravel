@@ -50,8 +50,8 @@ class GrupoRequest extends FormRequest
             'numero'        => 'numero del Grupo',
             'pot_instalada'    => 'potencia instalada',
             'pot_disponible'    => 'potencia disponible',
-            'potIndispMtto'    => 'potencia indisponible por mantenimiento',
-            'potIndispAveria'    => 'potencia indisponible por averia',
+            'potIndispMtto'    => 'potencia estado por mantenimiento',
+            'potIndispAveria'    => 'potencia estado por averia',
 
         ];
     }

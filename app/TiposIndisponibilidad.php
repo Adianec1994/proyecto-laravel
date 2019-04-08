@@ -9,7 +9,7 @@ class TiposIndisponibilidad extends Model
     protected $table = 'tiposIndisponibilidades';
 
     protected $fillable = [
-        'tipo'
+        'tipo','activo'
     ];
 
     protected $primaryKey = 'idTipoIndisp';

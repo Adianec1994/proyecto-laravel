@@ -13,7 +13,7 @@ class EventosDiario extends Model
         'fConfirmado','fVisita2','fSolucion','horas','sistema','subSistema','parte',
         'fallo','diagnosticoPreliminar','diagnostico','responsable','insertadoPor',
         'piezas','reportadoA','numReporte','equipoAuxiliar','garantia','idProvincias',
-        'idEmpresas','idGrupos','idBaterias'
+        'idGrupos',
     ];
 
     protected $primaryKey = 'idEventosDiarios';

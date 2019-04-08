@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Nomencladores;
 
 use App\Bateria;
 use App\CentralElectrica;
+use App\Estado;
 use App\Http\Requests\GrupoRequest;
-use App\Potencia;
 use App\Provincia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,9 +20,14 @@ class GrupoController extends Controller
      */
     public function index()
     {
-        $grupo=Grupo::all();
-        return view('nomencladores.grupo.index')
-            ->with('grupos',$grupo);
+        $provin= Provincia::all()->where('activo',true);
+        $cent = CentralElectrica::all()->where('activo',true);
+        $bat = Bateria::all()->where('activo',true);
+        $est = Estado::all()->where('activo',true);
+        $grupo=Grupo::all()->where('activo',true);
+        return view('nomencladores.grupo.index')->with('provin',$provin)
+            ->with('grupos',$grupo)->with('cent',$cent)->with('bat',$bat)
+            ->with('est',$est);
     }
 
     /**
@@ -32,12 +37,10 @@ class GrupoController extends Controller
      */
     public function create()
     {
-        $provin = Provincia::all();
-        $cent = CentralElectrica::all();
-        $bat = Bateria::all();
-        $pot = Potencia::all();
-        return view('nomencladores.grupo.create')->with('provin',$provin)
-            ->with('cent',$cent)->with('bat',$bat)->with('pot',$pot);
+        $bat = Bateria::all()->where('activo',true);
+        $est = Estado::all()->where('activo',true);
+        return view('nomencladores.grupo.create')->with('bat',$bat)
+            ->with('est',$est);
     }
 
     /**
@@ -49,6 +52,7 @@ class GrupoController extends Controller
     public function store(GrupoRequest $request)
     {
         Grupo::create($request->all());
+        return 'grupo';
     }
 
     /**
@@ -73,10 +77,15 @@ class GrupoController extends Controller
         $provin = Provincia::all();
         $cent = CentralElectrica::all();
         $bat = Bateria::all();
-        $pot = Potencia::all();
-        $grup=Grupo::findOrFail($id);
-        return view('nomencladores.grupo.edit')->with('grup',$grup)->with('provin',$provin)
-            ->with('cent',$cent)->with('bat',$bat)->with('pot',$pot);
+        $est = Estado::all();
+        $grup =Grupo::find($id);
+        $grup->cent;
+        $grup->bat;
+        $grup->est;
+        $grup->provin;
+        return view('nomencladores.grupo.edit')->with('grup',$grup)
+            ->with('bat',$bat)->with('est',$est)->with('cent',$cent)
+            ->with('provin',$provin);
     }
 
     /**
@@ -89,10 +98,8 @@ class GrupoController extends Controller
     public function update(Request $request, $id)
     {
         $grup = Grupo::find($id);
-        $grup->fill($request->all());
-        $grup->save();
-        return view('nomencladores.grupo.index')
-            ->with('grupos',$grup);
+        $grup->update($request->all());
+        return 'grupo';
     }
 
     /**
@@ -103,6 +110,9 @@ class GrupoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $grupo=Grupo::find($id);
+        $grupo->activo=false;
+        $grupo->save();
+        return 'grupo';
     }
 }

@@ -8,7 +8,7 @@ class TipoMantenimiento extends Model
 {
     protected $table = 'tipoMantenimientos';
     protected $fillable = [
-        'tipo'
+        'tipo','activo'
     ];
 
     protected $primaryKey = 'idTipoMtto';

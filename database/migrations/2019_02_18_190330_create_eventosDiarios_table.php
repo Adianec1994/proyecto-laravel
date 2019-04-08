@@ -42,14 +42,12 @@ class CreateEventosdiariosTable extends Migration
                 $table->text('equipoAuxiliar')->nullable();
                 $table->text('garantia')->nullable();
                 $table->integer('idProvincias')->unsigned();
-                $table->integer('idEmpresas')->unsigned();
                 $table->integer('idGrupos')->unsigned();
-                $table->integer('idBaterias')->unsigned();
                 $table->timestamps();
 
-                $table->index(["idProvincias", "idEmpresas"], 'fk_eventosDiarios_provincias1_idx');
+                $table->index(["idProvincias"], 'fk_eventosDiarios_provincias1_idx');
 
-                $table->index(["idGrupos", "idBaterias"], 'fk_eventosDiarios_grupos1_idx');
+                $table->index(["idGrupos"], 'fk_eventosDiarios_grupos1_idx');
 
                 $table->foreign('idProvincias', 'fk_eventosDiarios_provincias1_idx')
                     ->references('idProvincias')->on('provincias')

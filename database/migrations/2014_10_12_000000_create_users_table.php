@@ -16,9 +16,17 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('cargo');
+            $table->string('username')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('activo')->default(true);
+
+            //relacion
+            $table->integer('rol_id')->unsigned()->default('1');
+            $table->foreign('rol_id')->references('id')->on('rol_users');
+
             $table->rememberToken();
             $table->timestamps();
         });
